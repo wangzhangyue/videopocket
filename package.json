@@ -1,0 +1,16 @@
+{
+  "name": "video-pocket",
+  "version": "0.2.2",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "build": "node scripts/build.mjs",
+    "check": "node scripts/check.mjs",
+    "audit:public": "node scripts/audit-public.mjs"
+  },
+  "license": "MIT"
+}

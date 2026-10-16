@@ -1,0 +1,12 @@
+vendor/
+build/
+dist/
+node_modules/
+.DS_Store
+.env
+.env.*
+*.log
+*.pem
+*.key
+*results.txt
+*results.json
