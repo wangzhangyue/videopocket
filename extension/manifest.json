@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "拾影 · VideoPocket",
+  "version": "0.2.2",
+  "description": "保存多个网站的公开视频，支持MP4/WebM 与 HLS/DASH 点播。macOS 本地助手，最高 1080p。",
+  "minimum_chrome_version": "105",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmR0mPPHUgpMPK9U7tKdHDsVe3vZS4FA05z51gLGL7fheVnGG3fZGEzlOkqWmQVvK77e7Zynoe0O2JqmNTGPbwcRWzZq2TqX/tbFvvHSYX/X4IRaKQRZ+L3COzcFMr0ZHaIBq8PdJO+q5e55xWxOoBiH1Quc56vo39H+QPgOQXnkV9dNHxCpFyV980/S76Wfkon5XY06HAPYXvYSuA6ZbSrIEE21KU+M2fj0amBbt52H4FZws5uG9bx4SeiN8zVOtKj25pfRuO00B7Zz6wJv4Klp8D5PFhUcabMhpgIo1WIeuRdxPcQUH7Ial/lqyGL6oql+p4lNJwf9fWvNNczaaNwIDAQAB",
+  "permissions": [
+    "activeTab",
+    "storage",
+    "nativeMessaging"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "拾影 · 保存视频"
+  },
+  "icons": {
+    "16": "icons/16.png",
+    "32": "icons/32.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
+  },
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

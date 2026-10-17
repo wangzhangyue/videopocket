@@ -1,0 +1,29 @@
+:root { color-scheme: light; font: 15px/1.85 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif; color: #292f29; background: #f7f6f2; }
+* { box-sizing: border-box; }
+body { margin: 0; }
+::selection { background: #d9e4cb; color: #292f29; }
+main { max-width: 740px; margin: auto; padding: 56px 32px; }
+header { padding-bottom: 28px; border-bottom: 1px solid #d9ddd3; }
+header span { font-size: 12px; color: #456141; }
+h1 { font-size: 34px; letter-spacing: -.02em; line-height: 1.4; font-weight: 650; margin: 16px 0 12px; text-wrap: balance; }
+header p { color: #61685e; }
+section { padding: 28px 0; border-bottom: 1px solid #d9ddd3; }
+h2 { font-size: 20px; line-height: 1.5; font-weight: 650; margin: 0 0 16px; color: #456141; }
+p,li,dd { font-size: 14px; line-height: 1.95; color: #525b4e; }
+li { margin: 12px 0; padding-left: 4px; }
+ol { padding-left: 22px; }
+code { font-size: 12px; background: #e9eee3; padding: 3px 6px; border-radius: 5px; overflow-wrap: anywhere; }
+.note { padding: 16px 20px; background: #e9eee3; border-radius: 12px; font-size: 13px; }
+dt { font-size: 15px; font-weight: 650; margin-top: 24px; }
+dd { margin: 6px 0 0; }
+footer { font-size: 12px; color: #61685e; margin-top: 28px; }
+a { color: #456141; text-underline-offset: 4px; }
+a:focus-visible { outline: 2px solid #456141; outline-offset: 3px; }
+@media (max-width: 480px) { main { padding: 30px 22px; } h1 { font-size: 28px; } section { padding: 24px 0; } }
+[hidden] { display: none !important; }
+.language-bar { max-width: 740px; margin: auto; padding: 24px 32px 0; display: flex; align-items: center; justify-content: flex-end; gap: 12px; flex-wrap: wrap; font-size: 12px; color: #61685e; }
+.language-bar select { min-height: 36px; padding: 5px 10px; color: #456141; background: transparent; border: 1px solid #b7bfb0; border-radius: 8px; font: inherit; }
+.language-bar select:focus-visible { outline: 2px solid #456141; outline-offset: 3px; }
+.language-bar + main, main[data-language-panel] { padding-top: 20px; }
+#language-status { color: #943c2f; }
+@media (max-width: 480px) { .language-bar { padding-inline: 22px; } }
