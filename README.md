@@ -1,12 +1,73 @@
-# 拾影 · VideoPocket
+# VideoPocket · 拾影
 
-A local-first Chrome extension for saving videos you own or are authorized to download.
+[English](#english) · [简体中文](#简体中文)
+
+## English
+
+A local-first Chrome extension for saving videos you own or are authorized to download on macOS. The extension connects to a local helper through Native Messaging and uses yt-dlp, FFmpeg, and FFprobe to resolve, save, and validate videos.
+
+**This repository distributes source code only, with no prebuilt installers.** The third-party redistribution license review for bundled installers is not yet complete. Build scripts are provided for local development and inspection; their inclusion does not mean their outputs are approved for public distribution.
+
+### Features and scope
+
+- Chinese / English language switch; use the current page URL or enter an HTTP(S) URL.
+- Single on-demand videos up to 1080p; compatible MP4 or WebM audio/video combinations, without video transcoding.
+- Stage-based progress, cancellation, retries from scratch, folder selection, and file reveal.
+- The latest 20 local task records, local thumbnails, duration badges, and playback in the default application.
+- No browser Cookie access, login-session import, page scanning, batch downloads, or video relay service.
+- DRM-protected, paid-access, login-required, or platform-verification-required content is outside the supported scope. Downloading from every website or saving every playable video is not guaranteed.
+
+Use only when you have the necessary rights and authorization, and comply with applicable laws and platform terms. Public playback does not imply permission to download or redistribute. This project claims no affiliation with or endorsement by YouTube, X, Google, or other platforms. These usage notes neither expand nor restrict the software copyright permissions granted by LICENSE.
+
+### Development and preview
+
+Requires Node.js 22+. There are no third-party npm dependencies. Default checks do not download online videos or require an installed helper.
+
+```sh
+npm test
+npm run check
+npm run audit:public
+node tests/preview-server.mjs 4173
+```
+
+Open http://127.0.0.1:4173/?scenario=completed to view the simulated interface. The preview does not download videos or launch a real player. Preview imagery comes from a project-generated test clip, without third-party video frames.
+
+### Build the macOS helper locally
+
+Targets macOS 13+ and stable Google Chrome. Building requires macOS Command Line Tools; follow Apple's official installation process. The scripts below download build dependencies from official upstream sources. Read the [third-party notices](THIRD_PARTY_NOTICES.md) first.
+
+```sh
+bash scripts/fetch-vendor.sh
+bash scripts/build-ffmpeg.sh x64  # Intel; use arm64 for Apple Silicon
+node scripts/build.mjs x64      # Match your processor architecture
+VP_MEDIA_TEST=1 node --test tests/thumbnail.test.mjs
+```
+
+The scripts generate local development installers. Do not publish these outputs as this project's public releases before completing the dependency license review. To install locally, enable Developer mode at chrome://extensions, load the extension directory, then run the locally built .pkg matching your processor. Packages are unsigned and not notarized; do not disable system security protections. Building and installation have not passed acceptance testing on a clean Apple Silicon system.
+
+The native host validates the extension's identity. The manifest key is a public extension identity key, not a secret or credential. Keep it to match the current helper/config.json; changing the extension identity requires updating both configurations.
+
+To uninstall, quit Chrome, run the uninstall helper included in the locally built package, then remove the extension. Videos and helper records are retained by default; see the [privacy policy](PRIVACY.md) for cleanup details.
+
+### Limitations and validation
+
+Quitting the browser interrupts tasks. There is no queue or download resumption. Thumbnail generation failures do not change a successful video download's status. The current minimal component build does not support AV1 software decoding. Missing media files cannot be revealed or played. See [known limitations](docs/KNOWN_LIMITS.md) and [validation scope](docs/VALIDATION.md).
+
+### License and feedback
+
+Original source code, documentation, icons, and project-generated test assets use the [MIT license](LICENSE). Third-party components, which are not included in this repository, retain their own licenses. See [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
+
+For usage questions, open an Issue without uploading unauthorized videos, Cookies, signed URLs, or unredacted logs. See [SECURITY.md](SECURITY.md) for security reports and [CONTRIBUTING.md](CONTRIBUTING.md) for contributions and copyright concerns.
+
+---
+
+## 简体中文
 
 面向 macOS 的视频保存工具：Chrome 插件通过 Native Messaging 连接本地助手，使用 yt-dlp、FFmpeg 和 FFprobe 解析、保存与校验视频。
 
 **本仓库仅发布源码，不提供预编译安装包。** 集成安装包的第三方再分发许可审查尚未完成。构建脚本供开发者本地构建与检查，不代表已批准对外分发其产物。
 
-## 功能与范围
+### 功能与范围
 
 - 中文 / English 切换；当前页链接或手动输入 HTTP(S) 链接。
 - 单个点播视频，最高 1080p；选择 MP4 或 WebM 兼容音视频组合，不转码视频。
@@ -17,7 +78,7 @@ A local-first Chrome extension for saving videos you own or are authorized to do
 
 仅在拥有必要权利及授权、并符合适用法律和平台条款的情况下使用。公开可播放不等于允许下载或再传播。项目不声称与 YouTube、X、Google 或其他平台存在合作或认可关系。使用说明不扩大也不限制 LICENSE 所授予的软件版权许可。
 
-## 开发与预览
+### 开发与预览
 
 需要 Node.js 22+。无 npm 第三方依赖。普通检查不联网下载视频，也不要求安装助手。
 
@@ -30,7 +91,7 @@ node tests/preview-server.mjs 4173
 
 打开 http://127.0.0.1:4173/?scenario=completed 查看模拟界面。预览不会下载视频或实际启动播放器。界面图片来自项目自制测试片段，不包含第三方视频画面。
 
-## 本地构建 macOS 助手
+### 本地构建 macOS 助手
 
 目标为 macOS 13+、正式版 Google Chrome。构建需要 macOS Command Line Tools；安装这些工具请遵循 Apple 官方流程。以下脚本从官方上游下载构建依赖，请先阅读 [第三方说明](THIRD_PARTY_NOTICES.md)。
 
@@ -47,11 +108,11 @@ VP_MEDIA_TEST=1 node --test tests/thumbnail.test.mjs
 
 卸载时退出 Chrome，运行本地构建包内的卸载助手，再移除扩展。默认保留视频与助手记录；清理方式见 [隐私说明](PRIVACY.md)。
 
-## 限制与验证
+### 限制与验证
 
 退出浏览器会中断任务；没有排队或断点续传。缩略图生成失败不会改变成功的视频下载状态；当前精简组件不支持 AV1 软件解码。缺失的媒体文件不能定位或播放。更多内容见 [已知限制](docs/KNOWN_LIMITS.md) 和 [验证记录](docs/VALIDATION.md)。
 
-## 许可与反馈
+### 许可与反馈
 
 自有源码、文档、图标及自制测试素材采用 [MIT](LICENSE)。未随本仓库提供的第三方组件适用各自许可证，详见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。
 
